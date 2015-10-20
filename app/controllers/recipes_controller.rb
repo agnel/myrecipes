@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   end
   
   def create
-    @recipe = Recipe.new(require_params)
+    @recipe = Recipe.new(recipe_params)
     @recipe.chef = Chef.find(2)
     
     if @recipe.save
@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     
-    if @recipe.update(require_params)
+    if @recipe.update(recipe_params)
       #do something
       flash[:success] = "Your recipe was updated successfully!"
       redirect_to recipe_path(@recipe)
@@ -44,8 +44,8 @@ class RecipesController < ApplicationController
   
   private
   
-    def require_params
-      params.require(:recipe).permit(:name, :summary, :description)
+    def recipe_params
+      params.require(:recipe).permit(:name, :summary, :description, :picture)
     end
     
 end
