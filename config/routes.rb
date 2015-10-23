@@ -19,6 +19,14 @@ Rails.application.routes.draw do
       post 'like'
     end
   end
+  
+  resources :chefs, except: [:new]
+  
+  get '/register', to: 'chefs#new'
+  
+  get '/login', to: 'logins#new'
+  post '/login', to: 'logins#create'
+  get '/logout', to: 'logins#destroy'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
