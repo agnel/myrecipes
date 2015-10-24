@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   
   before_action :set_recipe, only: [:edit, :update, :show, :like]
-  before_action :require_user, except: [:show, :index] # you need to be logged in
+  before_action :require_user, except: [:show, :index, :like] # you need to be logged in
+  before_action :require_user_like, only: [:like] # redirect to same page after like/dislike if not logged in
   before_action :require_same_user, only: [:edit, :update] # you have to be the owner of the recipe to edit/update it
   
   def index
@@ -58,7 +59,7 @@ class RecipesController < ApplicationController
   private
   
     def recipe_params
-      params.require(:recipe).permit(:name, :summary, :description, :picture)
+      params.require(:recipe).permit(:name, :summary, :description, :picture, style_ids: [], ingredient_ids: [])
     end
     
     def set_recipe
@@ -71,5 +72,12 @@ class RecipesController < ApplicationController
         redirect_to recipes_path
       end
     end
+    
+    def require_user_like
+    if !logged_in?
+      flash[:danger] = 'You must be logged in to perform this action!'
+      redirect_to :back
+    end
+  end
     
 end

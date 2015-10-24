@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get '/login', to: 'logins#new'
   post '/login', to: 'logins#create'
   get '/logout', to: 'logins#destroy'
+  
+  resources :styles, only: [:new, :create, :show]
+  resources :ingredients, only: [:new, :create, :show]
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
