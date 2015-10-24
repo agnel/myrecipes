@@ -87,7 +87,7 @@ h2 {
     background-color: #EDEDED;
 }
 
-input[type='text'],input[type='password'],input[type='submit'],input[type='file'],
+input,
 textarea, select, .uneditable-input {
     border: 1px solid #D2D2D2;
     border-radius: 5px;
@@ -95,9 +95,14 @@ textarea, select, .uneditable-input {
     margin-bottom: 15px;
 }
 
-input[type='text'],input[type='password'],input[type='submit'],input[type='file'] {
+input {
     /*height: auto !important;*/
     height: 32px;
+}
+
+.input_checkbox input {
+    height: auto !important;
+    width: auto !important;
 }
 
 span.picture {
